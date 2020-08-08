@@ -283,7 +283,7 @@ size_t SoftwareSerial::write(const uint8_t* buffer, size_t size) {
 size_t ICACHE_RAM_ATTR SoftwareSerial::write(const uint8_t* buffer, size_t size, SoftwareSerialParity parity) {
     if (m_rxValid) { rxBits(); }
     if (!m_txValid) { return -1; }
-
+    enableTx(true);
     if (m_txEnableValid) {
         digitalWrite(m_txEnablePin, HIGH);
     }
@@ -365,6 +365,7 @@ size_t ICACHE_RAM_ATTR SoftwareSerial::write(const uint8_t* buffer, size_t size,
     if (m_txEnableValid) {
         digitalWrite(m_txEnablePin, LOW);
     }
+    enableTx(false);
     return size;
 }
 
