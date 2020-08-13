@@ -207,6 +207,7 @@ size_t SoftwareSerial::read(uint8_t* buffer, size_t size) {
 size_t SoftwareSerial::readBytes(uint8_t* buffer, size_t size) {
     if (!m_rxValid || !size) { return 0; }
     size_t count = 0;
+    delay(20);
     auto start = millis();
     do {
         auto readCnt = read(&buffer[count], size - count);
